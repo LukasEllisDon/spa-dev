@@ -1,28 +1,38 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import App from './App.vue'
-import singleSpaVue from 'single-spa-vue'
-import configuredRouter from './router.js'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import singleSpaReact from 'single-spa-react'
+import root from './root.component.js'
 
-Vue.use(VueRouter)
-
-const vueLifecycles = singleSpaVue({
-  Vue,
-  appOptions: {
-    el: '#planets',
-    render: h => h(App),
-    router: configuredRouter,
-  }
+const reactLifecycles = singleSpaReact({
+  React,
+  ReactDOM,
+  rootComponent: root,
+  domElementGetter,
 })
 
 export const bootstrap = [
-  vueLifecycles.bootstrap,
-];
+  reactLifecycles.bootstrap,
+]
 
 export const mount = [
-  vueLifecycles.mount,
-];
+  reactLifecycles.mount,
+]
 
 export const unmount = [
-  vueLifecycles.unmount,
-];
+  reactLifecycles.unmount,
+]
+
+export const unload = [
+  reactLifecycles.unload,
+]
+
+function domElementGetter() {
+  let el = document.getElementById("planets");
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'planets';
+    document.body.appendChild(el);
+  }
+
+  return el;
+}
