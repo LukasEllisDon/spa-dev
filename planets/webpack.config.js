@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/planets.js'),
@@ -16,26 +16,34 @@ module.exports = {
     rules: [
       {parser: {System: false}},
       {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
         test: /\.js$/,
         exclude: [path.resolve(__dirname, 'node_modules')],
         loader: 'babel-loader'
       },
       {
-        test: /\.css$/,
+        test: /\.krem.css$/,
+        exclude: [path.resolve(__dirname, 'node_modules')],
         use: [
-          'vue-style-loader',
-          'css-loader'
+          {
+            loader: 'kremling-loader',
+            options: {
+              namespace: 'planets',
+              postcss: {
+                plugins: {
+                  'autoprefixer': {}
+                }
+              }
+            },
+          },
         ]
       }
     ]
   },
   plugins: [
-    new VueLoaderPlugin(),
     new CleanWebpackPlugin(['build/planets']),
+    CopyWebpackPlugin([
+      {from: path.resolve(__dirname, 'src/planets.js')}
+    ]),
   ],
   devtool: 'source-map',
   externals: [
@@ -43,5 +51,9 @@ module.exports = {
     /^lodash$/,
     /^single-spa$/,
     /^rxjs\/?.*$/,
+    /^react$/,
+    /^react\/lib.*/,
+    /^react-dom$/,
+    /.*react-dom.*/,
   ],
 }
