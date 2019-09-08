@@ -3,8 +3,10 @@ const { pluck, tap, map } = operators
 import axios from 'axios'
 import addId from './addId.js'
 
+const baseURL = 'https://swapi.co/api/'
+
 const axiosInstance = axios.create({
-  baseURL: 'https://swapi.co/api/',
+  baseURL,
   timeout: 20000,
 })
 
@@ -47,7 +49,8 @@ export default function fetchWithCache(url, axiosOptions) {
       if (response.results && Array.isArray(response.results)) {
         response.results.forEach((item) => {
           if (item.url) {
-            cache[item.url] = {
+            const strippedURL = item.url.replace(baseURL, '')
+            cache[strippedURL] = {
               lastPulled: Date.now(),
               value: item,
             }
@@ -59,3 +62,4 @@ export default function fetchWithCache(url, axiosOptions) {
 }
 
 const cache = {}
+window.c = cache

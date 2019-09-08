@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect } from 'react'
 import PlanetList from '../planet-list/planet-list.component.js'
+import SelectedPlanet from './selected-planet/selected-planet.component.js'
+import { get } from 'lodash'
 import { getPlanets } from '../utils/api.js'
 import { useCss } from 'kremling'
 import css from './planets-page.krem.css'
@@ -10,7 +12,6 @@ export default function PlanetPage (props) {
     loading: false,
     page: 0,
     nextPage: false,
-    selectedPlanet: undefined,
   }
 
   const [ state, dispatch ] = useReducer(reducer, initialState)
@@ -20,6 +21,9 @@ export default function PlanetPage (props) {
     dispatch({type: 'fetchPlanets'})
   }, [])
   const { page, nextPage, loading } = state
+  const { search } = props.location
+  const regexSearch = /[0-9]+/.exec(search)
+  const selected = get(regexSearch, '[0]')
 
   useEffect(() => {
     if (page > 0) {
@@ -53,7 +57,7 @@ export default function PlanetPage (props) {
         </div>
         <div className='selectedWrapper'>
           <div className='selectedPlanet'>
-            selected
+            <SelectedPlanet selectedId={selected} />
           </div>
         </div>
       </div>
