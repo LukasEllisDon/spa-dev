@@ -17,3 +17,7 @@ export function getPerson(peronNumber) {
     `people/${peronNumber}/`
   )
 }
+
+export function getPeopleByIds(people = []) {
+
+}

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import css from './selected-planet.krem.css'
 import {useCss} from 'kremling'
+import NotablePeople from './notable-people/notable-people.component.js'
+import css from './selected-planet.krem.css'
 import { getPlanet } from '../../utils/api.js'
 
 export default function SelectedPlanet (props) {
@@ -39,6 +40,7 @@ export default function SelectedPlanet (props) {
         <div className='attributeTitle'>Terrain</div>
         <div className='attribute'>{selectedPlanet.terrain}</div>
       </div>
+      <NotablePeople people={selectedPlanet.residents} />
     </div>
   )
 }
