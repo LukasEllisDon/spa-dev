@@ -19,10 +19,10 @@ export default function PlanetPage (props) {
   useEffect(() => {
     dispatch({type: 'fetchPlanets'})
   }, [])
+  const { page, nextPage, loading } = state
 
   useEffect(() => {
-    if (state.page > 0) {
-      debugger
+    if (page > 0) {
       const req$ = getPlanets(state.page).subscribe(
         (results) => {
           dispatch({type: 'addPlanets', payload: {
@@ -32,12 +32,23 @@ export default function PlanetPage (props) {
         }
       )
     }
-  }, [`${state.page}`])
+  }, [page])
 
   return (
     <div {...scope} className='planetPage'>
       <div className='planetPageContents'>
         <div className='listWrapper'>
+          {
+            nextPage ? (
+              <button
+                className='brand-button margin-bottom-16'
+                onClick={() => {dispatch({type: 'fetchPlanets'})}}
+                disabled={!nextPage || loading}
+              >
+                Fetch More Planets
+              </button>
+            ) : null
+          }
           <PlanetList {...state}/>
         </div>
         <div className='selectedWrapper'>
@@ -51,21 +62,18 @@ export default function PlanetPage (props) {
 }
 
 function reducer (state, action) {
-  console.log('state', JSON.stringify(state.page))
+  const newState = {...state}
   switch(action.type) {
     case 'addPlanets':
-      debugger
       const {payload} = action
-      return {
-        ...state,
-        loading: false,
-        nextPage: payload.nextPage,
-        planets: [...state.planets, ...payload.results]
-      }
+      newState.loading = false
+      newState.nextPage = payload.nextPage
+      newState.planets = [...newState.planets, ...payload.results]
+      return newState
     case 'fetchPlanets':
-      state.loading = true
-      state.page = state.page + 1
-      return state
+      newState.loading = true
+      newState.page = newState.page + 1
+      return newState
     default:
       return state
   }
