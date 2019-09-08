@@ -1,4 +1,5 @@
 import fetchWithCache from '@portal/fetchWithCache'
+import { combineLatest } from 'rxjs'
 
 export function getPlanets(pageNum = 1) {
   return fetchWithCache(
@@ -19,5 +20,11 @@ export function getPerson(peronNumber) {
 }
 
 export function getPeopleByIds(people = []) {
+  const peopleObsArray = people.map(person => {
+    return fetchWithCache(
+      `people/${person}/`
+    )
+  })
+  return combineLatest(peopleObsArray)
 
 }
