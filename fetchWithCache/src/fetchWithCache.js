@@ -62,4 +62,3 @@ export default function fetchWithCache(url, axiosOptions) {
 }
 
 const cache = {}
-window.c = cache
