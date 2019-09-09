@@ -19,7 +19,7 @@ npm 6.1.0
 
 ## Current applications
 1. People (written in react)
-2. Planets (written in vue)
+2. Planets (written in react)
 3. Navigation (written in react)
 
 ## Current Services
