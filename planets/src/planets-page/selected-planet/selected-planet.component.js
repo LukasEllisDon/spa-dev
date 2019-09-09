@@ -6,7 +6,7 @@ import { getPlanet } from '../../utils/api.js'
 
 export default function SelectedPlanet (props) {
   const { selectedId } = props
-  const [selectedPlanet, setPlanet] = useState({})
+  const [selectedPlanet, setPlanet] = useState()
   const scope = useCss(css)
 
   useEffect(() => {
@@ -21,6 +21,12 @@ export default function SelectedPlanet (props) {
       }
     }
   }, [selectedId])
+
+  if (!selectedPlanet) {
+    return <div>
+      No planet Selected
+    </div>
+  }
 
   return (
     <div {...scope}>
