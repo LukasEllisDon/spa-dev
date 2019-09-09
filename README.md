@@ -23,7 +23,7 @@ npm 6.1.0
 3. Navigation (written in react)
 
 ## Current Services
-1. fetchWithCache
+1. fetchWithCache (vanilla javascript)
 
 # Notes
 
