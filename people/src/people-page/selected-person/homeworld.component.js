@@ -57,7 +57,7 @@ export default class Homeworld extends React.Component {
           homeworld && (
             <Link
               className='brand-link'
-              to={`/planets/${homeworld.id}/attributes`}
+              to={`/planets/${homeworld.id}`}
             >
               {homeworld.name}
             </Link>

@@ -21,8 +21,8 @@ export default function PlanetPage (props) {
     dispatch({type: 'fetchPlanets'})
   }, [])
   const { page, nextPage, loading } = state
-  const { search } = props.location
-  const regexSearch = /[0-9]+/.exec(search)
+  const { pathname } = props.location
+  const regexSearch = /[0-9]+/.exec(pathname)
   const selected = get(regexSearch, '[0]')
 
   useEffect(() => {

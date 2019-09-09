@@ -16,7 +16,7 @@ function PlanetList (props) {
           return (
             <Link key={planet.id}
               className='planet'
-              to={`${match.path}?selected=${window.encodeURIComponent(planet.id)}`}
+              to={`${match.path}/${planet.id}`}
             >
               {planet.name}
             </Link>
