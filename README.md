@@ -45,5 +45,10 @@ In our project code splitting is further complicated because webpack's module fo
 the website root, which will always fail in this project unless webpack is told where to load additional modules. Right
 now there is a single example of this, [done in the people application](./people/src/people.js#L10).
 
-## Deployment conceptual model
-![deployment-conceptual-model.pdf](https://gitlab.com/TheMcMurder/single-spa-portal-example/blob/master/conceptual-model.pdf)
+## Deployment
+
+I'm unable to help others implement deployments at this time. For specific deployment help we'll need to discuss consultation fees.
+
+### Conceptual model:
+
+[deployment-conceptual-model.pdf](https://gitlab.com/TheMcMurder/single-spa-portal-example/blob/master/conceptual-model.pdf)
