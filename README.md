@@ -46,4 +46,4 @@ the website root, which will always fail in this project unless webpack is told 
 now there is a single example of this, [done in the people application](./people/src/people.js#L10).
 
 ## Deployment conceptual model
-![deployment-conceptual-model.pdf](./conceptual-model.pdf)
+![deployment-conceptual-model.pdf](https://gitlab.com/TheMcMurder/single-spa-portal-example/blob/master/conceptual-model.pdf)
